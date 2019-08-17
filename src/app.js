@@ -4,6 +4,7 @@ const app=express();
 const hbs=require('hbs'); //For Partials these are the part of the view which cpuld be common for every page like footer or headers
 const weather=require('./utils/weatherResult');
 const geoCode=require('./utils/geoCode');
+const port=process.env.PORT || 4500;
 
 //Define path for express config
 const publicDirectorypath=path.join(__dirname,'../public');
@@ -95,4 +96,6 @@ app.get('*',(req,res)=>{
 
 
 
-app.listen(4500);
+app.listen(port,()=>{
+    console.log('server is up on Port '+port);
+});
