@@ -4,7 +4,7 @@ const message=document.querySelector('#message');
 weatherForm.addEventListener('submit',(e)=>{
     e.preventDefault();
     const location=search.value;
-    message.textContent='Loading...'
+    message.textContent='Loading.'
   
     fetch('http://localhost:4500/weather?address='+location).then((response)=>{
     response.json().then((data)=>{
