@@ -1,7 +1,7 @@
 const request=require('request');
 
-const weather=(latitude,longitude,callback)=>{
-    const url="https://api.darksky.net/forecast/58c8b3e23a86d14b0492572c6f5fd921/"+encodeURIComponent(latitude)+","+encodeURIComponent(longitude)+"?lang=en&units=si"
+const weather=(latitude,longitude,lang,callback)=>{
+    const url="https://api.darksky.net/forecast/58c8b3e23a86d14b0492572c6f5fd921/"+encodeURIComponent(latitude)+","+encodeURIComponent(longitude)+"?lang="+lang+"&units=si"
     request({url:url,json:true},(error,response)=>{
     //const data=JSON.parse(response.body);
 
@@ -20,9 +20,8 @@ const weather=(latitude,longitude,callback)=>{
     const currentWeather=data.currently.temperature;
     const precipitation=data.currently.precipProbability;
     const weatherResult=` ${weekSummary} The Current Temperature  is
-    ${currentWeather}. There will be ${precipitation} Rain Chances`
-    callback(undefined,weatherResult);
-    
+    ${currentWeather} The high today is ${data.daily.data[0].temperatureHigh}, with a low of ${data.daily.data[0].temperatureLow} .There will be ${precipitation} Rain Chances`
+    callback(undefined,weatherResult);    
     }
 }
 )

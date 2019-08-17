@@ -54,9 +54,19 @@ app.get('/help/*',(req,res)=>{
     })
 })
 app.get('/weather',(req,res)=>{
+    if(!req.query.address && !req.query.lang){
+        return res.send({
+            error:'You must Provide a Addres and also select a language'
+        })
+    }
     if(!req.query.address){
         return res.send({
-            error:'You must Provide a Addres '
+            error:'You must Provide a Address !'
+        })
+    }
+    if(!req.query.lang){
+        return res.send({
+            error:'You must Provide a Language'
         })
     }
     geoCode(req.query.address,(error,geoCodeResult)=>{
@@ -66,7 +76,7 @@ app.get('/weather',(req,res)=>{
             })
         }
         else if(geoCodeResult){
-        weather(geoCodeResult.latitude,geoCodeResult.longitude,(error,weatherResult)=>{
+        weather(geoCodeResult.latitude,geoCodeResult.longitude,req.query.lang,(error,weatherResult)=>{
             if(error){
                 res.send({
                     error:error

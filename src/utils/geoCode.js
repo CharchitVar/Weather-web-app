@@ -7,7 +7,7 @@ const geoCode=(address,callback)=>{
 
         }
         else if(response.body.features.length===0){
-            callback("PLease select a valid Location",undefined);    
+            callback("Please select a valid Location",undefined);    
         }
         else{
             callback(undefined,{
